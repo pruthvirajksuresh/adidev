@@ -1,0 +1,12 @@
+{
+  "name": "adidev-pharma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Adidev Pharma website for GitHub Pages",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check assets/site.js && node --check scripts/build.mjs && node --check scripts/serve.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
