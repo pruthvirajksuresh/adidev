@@ -16,5 +16,5 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); }
 });
 document.addEventListener('click', event => { if (!event.target.closest('.site-header')) closeMenu(); });
-window.matchMedia('(min-width: 701px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
 document.querySelector('#year').textContent = new Date().getFullYear();
