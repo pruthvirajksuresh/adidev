@@ -23,30 +23,25 @@ The build creates `dist/`, containing only public website files. All asset paths
 
 ## Publish on GitHub Pages
 
-The local repository is initialized on `main`. A remote repository has **not** been created, and the website is **not yet published**.
+The repository is [pruthvirajksuresh/adidev](https://github.com/pruthvirajksuresh/adidev), with deployment from `main`.
+
+Before the first deployment, open [Settings → Pages](https://github.com/pruthvirajksuresh/adidev/settings/pages) and select **GitHub Actions** under **Build and deployment → Source**. This creates the Pages site that the workflow needs. A `Get Pages site failed` / `Not Found` error at the configuration step means you should check this setting and the build job's `pages: read` permission.
 
 With the [GitHub CLI](https://cli.github.com/) installed and authenticated:
 
 ```sh
 gh auth login
-gh repo create adidev --public --source=. --remote=origin
-
+# Run once if Pages has not been enabled in Settings:
 gh api --method POST repos/pruthvirajksuresh/adidev/pages -f build_type=workflow
-git push -u origin main
+git push origin main
 ```
 
 Alternatively:
 
-1. Create an empty public repository named `adidev` under your GitHub account. Do not initialize it with a README, license, or `.gitignore`.
-2. Add the remote and push the local commit:
+1. In the repository, open **Settings → Pages → Source** and select **GitHub Actions**.
+2. Open **Actions → Deploy website to GitHub Pages → Run workflow** and select `main` to deploy the latest workflow.
 
-   ```sh
-   git remote add origin https://github.com/pruthvirajksuresh/adidev.git
-   git push -u origin main
-   ```
-
-3. In the repository, open **Settings → Pages → Source** and select **GitHub Actions**.
-4. Open **Actions → Deploy website to GitHub Pages → Run workflow** if the first run failed before Pages was enabled.
+The workflow uses Node.js 24 actions. Do not add `enablement: true` with the default `GITHUB_TOKEN`: automatic Pages creation requires a separate, more privileged token. Enabling Pages in Settings avoids adding another credential.
 
 After deployment succeeds, the expected address is `https://pruthvirajksuresh.github.io/adidev/`. Subsequent pushes to `main` deploy automatically.
 
